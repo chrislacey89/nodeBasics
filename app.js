@@ -20,16 +20,18 @@ const server = http.createServer((req, res) => {
       body.push(chunk);
     });
     // fires at the end
+    // this a callback and will run a synchronosly. It will register and run after the
     req.on("end", () => {
       //create a new buffer and add all chunks to it
       const parsedBody = Buffer.concat(body).toString();
       console.log(parsedBody);
+      //creates 2 objects in an array and gets the second one
       const message = parsedBody.split("="[1]);
       fs.writeFileSync("message.txt", message);
+      res.statusCode = 302;
+      res.setHeader("Location", "/");
+      return res.end();
     });
-    res.statusCode = 302;
-    res.setHeader("Location", "/");
-    return res.end();
   }
   res.setHeader("Content-Type", "text/html");
   res.write("<html>");
