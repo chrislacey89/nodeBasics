@@ -20,5 +20,8 @@
   "homepage": "https://github.com/chrislacey89/nodeBasics#readme",
   "devDependencies": {
     "nodemon": "^1.18.11"
+  },
+  "dependencies": {
+    "express": "^4.16.4"
   }
 }
