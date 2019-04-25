@@ -1,9 +1,15 @@
-const http = require("http");
-
 const express = require("express");
+const bodyParser = require("body-parser");
 
 const app = express();
 
-const server = http.createServer(app);
+const adminRoutes = require("./routes/admin");
+const shopRoutes = require("./routes/shop");
 
-server.listen(3000);
+//registers a middleware. It parses bodies sent through a form. then it calls next to go on to the next function
+app.use(bodyParser.urlencoded({ extended: false }));
+
+app.use(adminRoutes);
+app.use(shopRoutes);
+
+app.listen(3000);
