@@ -6,8 +6,8 @@ const bodyParser = require("body-parser");
 const app = express();
 
 // set any values globally on our app configuration
-// tell express that we want to complile dynamic templates with pug engine
-app.set("view engine", "pug");
+// tell express that we want to complile dynamic templates with ejs engine
+app.set("view engine", "ejs");
 //tell express wehre we want to compile them
 app.set("views", "views");
 
@@ -29,4 +29,3 @@ app.use((req, res, next) => {
 });
 
 app.listen(3000);
-``;
