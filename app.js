@@ -11,7 +11,7 @@ app.set("view engine", "ejs");
 //tell express wehre we want to compile them
 app.set("views", "views");
 
-const adminData = require("./routes/admin");
+const adminRoutes = require("./routes/admin");
 const shopRoutes = require("./routes/shop");
 
 //registers a middleware. It parses bodies sent through a form. then it calls next to go on to the next function
@@ -21,7 +21,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // admin is a filter. Only paths with /admin goes to adminRouts file
 
-app.use("/admin", adminData.routes);
+app.use("/admin", adminRoutes);
 app.use(shopRoutes);
 
 app.use((req, res, next) => {
