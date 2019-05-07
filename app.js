@@ -13,9 +13,11 @@ app.set("views", "views");
 
 const adminRoutes = require("./routes/admin");
 const shopRoutes = require("./routes/shop");
+const errorController = require("./controllers/error");
 
 //registers a middleware. It parses bodies sent through a form. then it calls next to go on to the next function
 app.use(bodyParser.urlencoded({ extended: false }));
+
 // allows use of static files
 app.use(express.static(path.join(__dirname, "public")));
 
@@ -24,8 +26,6 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/admin", adminRoutes);
 app.use(shopRoutes);
 
-app.use((req, res, next) => {
-  res.status(404).render("404", { pageTitle: "Page Not Found" });
-});
+app.use(errorController.get404);
 
 app.listen(3000);
