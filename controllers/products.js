@@ -1,4 +1,4 @@
-const products = [];
+const Product = require("../models/product");
 
 exports.getAddProduct = (req, res, next) => {
   res.render("add-product", {
@@ -11,11 +11,17 @@ exports.getAddProduct = (req, res, next) => {
 };
 
 exports.postAddProduct = (req, res, next) => {
-  products.push({ title: req.body.title });
+  // create a new product based on the info passed into the form using the product class template from models folder
+  const product = new Product(req.body.title);
+  // use save function found in product class
+  product.save();
   res.redirect("/");
 };
 
 exports.getProducts = (req, res, next) => {
+  // use save function found in product class. Returns products array
+
+  const products = Product.fetchAll();
   res.render("shop", {
     prods: products,
     pageTitle: "Shop",
