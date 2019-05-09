@@ -40,7 +40,8 @@ module.exports = class Product {
     });
   }
 
-  static fetchAll() {
+  // cb passes a function into FetchAll that it will execute when it is done. this way we can access the data we need
+  static fetchAll(cb) {
     const p = path.join(
       path.dirname(process.mainModule.filename),
       "data",
@@ -48,11 +49,14 @@ module.exports = class Product {
     );
     fs.readFile(p, (err, fileContent) => {
       if (err) {
-        return [];
+        //callback with an empty array
+        cb([]);
       }
 
       // it is returned as text so we need JSON.parse
-      return JSON.parse(fileContent);
+      //callback with the parsed JSON data
+
+      cb(JSON.parse(fileContent));
     });
     return products;
   }
